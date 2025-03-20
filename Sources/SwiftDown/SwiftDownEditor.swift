@@ -20,7 +20,14 @@ public struct SwiftDownEditor: UIViewRepresentable {
   }
 
     private(set) var isEditable: Bool = true
-    private(set) var theme: Theme = Theme.BuiltIn.defaultDark.theme()
+//    private(set) var theme: Theme = Theme.BuiltIn.defaultDark.theme()
+    private(set) var theme: Theme = {
+        if UITraitCollection.current.userInterfaceStyle == .dark {
+            return Theme.BuiltIn.defaultDark.theme()
+        } else {
+            return Theme.BuiltIn.defaultLight.theme()
+        }
+    }()
     private(set) var insetsSize: CGFloat = 0
     private(set) var autocapitalizationType: UITextAutocapitalizationType = .sentences
     private(set) var autocorrectionType: UITextAutocorrectionType = .default
